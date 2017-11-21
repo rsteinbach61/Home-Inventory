@@ -11,5 +11,3 @@ gem 'shotgun'
 gem 'pry'
 gem 'bcrypt'
 gem "tux"
-
-end
