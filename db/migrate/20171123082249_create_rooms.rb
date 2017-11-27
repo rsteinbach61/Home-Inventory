@@ -1,4 +1,4 @@
-class CreateRooms < ActiveRecord::Migration[5.1]
+class CreateRooms < ActiveRecord::Migration[4.2.5]
   def change
     create_table :rooms do |t|
       t.integer :house_id
