@@ -1,10 +1,10 @@
 display houses
 
-<%binding.pry%>
+<%#binding.pry%>
 
 <%@user.houses.each do |house|%>
 <ul>
-  <li><%=house.name%></li>
+  <li><a href="/houses/<%=house.id%>"><%=house.name%></a></li>
 </ul>
 <%end%>
 
