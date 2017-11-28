@@ -4,7 +4,7 @@ class UserController < ApplicationController
     if !logged_in?
       erb :'/users/create_user'
     else
-      redirect to('/houses/houses')
+      redirect to('/houses/index')
     end
   end
 
@@ -13,10 +13,10 @@ class UserController < ApplicationController
       redirect to('/signup')
     end
 
-  user = User.create(params)
-    if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
-      redirect to('/houses/houses')
+  @user = User.create(params)
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      redirect to('/houses/index')
     else
         redirect "/signup"
     end
@@ -27,10 +27,10 @@ class UserController < ApplicationController
   end
 
   post '/login' do
-    user = User.find_by(:email => params[:email])
-      if user && user.authenticate(params[:password])
-        session[:user_id] = user.id
-        redirect to('/houses/houses')
+    @user = User.find_by(:email => params[:email])
+      if @user && @user.authenticate(params[:password])
+        session[:user_id] = @user.id
+        erb :'/houses/index'
       else
         redirect '/login'
       end

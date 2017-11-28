@@ -1,5 +1,13 @@
 display houses
 
+<%binding.pry%>
+
+<%@user.houses.each do |house|%>
+<ul>
+  <li><%=house.name%></li>
+</ul>
+<%end%>
+
 <p><a href="/create_house"> Create House</a></p>
 
 
