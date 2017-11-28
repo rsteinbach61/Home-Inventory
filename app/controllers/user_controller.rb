@@ -22,6 +22,14 @@ class UserController < ApplicationController
     end
   end
 
+  get '/login' do
+    erb :'/users/login'
+  end
+
+  post '/login' do
+    
+  end
+
   get '/logout' do
     #clear session hash
       session.clear
