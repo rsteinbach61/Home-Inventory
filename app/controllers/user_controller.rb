@@ -21,4 +21,17 @@ class UserController < ApplicationController
         redirect "/signup"
     end
   end
+
+  get '/logout' do
+    #clear session hash
+      session.clear
+      redirect to '/login'
+  end
+
+  post '/logout' do
+    session.clear
+    redirect to '/login'
+  end
+
+  #-------------------------------
 end
