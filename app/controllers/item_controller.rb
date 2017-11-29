@@ -1,6 +1,10 @@
 class ItemController < ApplicationController
   get '/items/new' do
-    erb :'/items/new'
+    if logged_in?
+      erb :'/items/new'
+    else
+      redirect to ('/login')
+    end
   end
 
   post '/items/new' do
@@ -23,5 +27,12 @@ class ItemController < ApplicationController
       redirect to ('/login')
     end
   end
-
+  get '/items/:id' do
+    if logged_in?
+      @item = Item.all.find(params[:id])
+      erb :'/items/show'
+    else
+      redirect to('/login')
+    end
+  end
 end

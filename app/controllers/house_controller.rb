@@ -1,11 +1,19 @@
 class HouseController < ApplicationController
 
   get '/houses/index' do
-    erb :'/houses/index'
+    if logged_in?
+      erb :'/houses/index'
+    else
+      redirect to("/login")
+    end
   end
 
   get '/houses/new' do
-    erb :'/houses/new'
+    if logged_in?
+      erb :'/houses/new'
+    else
+      redirect to("/login")
+    end
   end
 
   post '/new_house' do
