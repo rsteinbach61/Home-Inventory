@@ -35,4 +35,29 @@ class ItemController < ApplicationController
       redirect to('/login')
     end
   end
+
+  get '/items/:id/edit' do
+    if logged_in?
+      @item = Item.find(params[:id])
+        if @item.user_id == current_user.id
+          erb :'/items/edit'
+        else
+          redirect to("/items/#{@item.id}")
+        end
+    else
+      redirect to('/login')
+    end
+  end
+
+  patch '/items/:id' do
+    @item = Item.find(params[:id])
+    if params[:name] == ""
+      redirect to("/items/#{@item.id}/edit")
+    else
+      @item.name = params[:name]
+      @item.save
+      redirect to("/items/#{@item.id}")
+    end
+  end
+  #-----------------
 end
