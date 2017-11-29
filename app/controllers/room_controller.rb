@@ -12,7 +12,6 @@ class RoomController < ApplicationController
     post '/rooms/new' do
       if logged_in?
         @user = current_user
-        binding.pry
         @room = Room.create(params)
         @room.save
         erb :'/rooms/show'
@@ -41,6 +40,7 @@ class RoomController < ApplicationController
 
     get '/rooms/:id/edit' do
       if logged_in?
+        @user = current_user
         @room = Room.find(params[:id])
           #if @room.user_id == current_user.id
             erb :'/rooms/edit'

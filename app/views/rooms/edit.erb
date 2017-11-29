@@ -1,7 +1,11 @@
-edit room
+
 <h3> Edit Room </h3>
 <form action="/rooms/<%=@room.id%>" method="POST">
 <input id="hidden" type="hidden" name="_method" value="PATCH">
 <p><input type="text" name="name" value="<%=@room.name%>" required="true"></p>
+<% @user.houses.each do |house| %>
+  <label><%= house.name %></label>
+  <input type="radio" name="house_id" value="<%=house.id%>">
+  <%end%>
 <input type="submit" value="Save" id="submit">
 </form>
