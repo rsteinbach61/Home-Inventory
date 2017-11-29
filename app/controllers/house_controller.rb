@@ -42,4 +42,15 @@ class HouseController < ApplicationController
     end
   end
 
+  patch '/houses/:id' do
+    @house = House.find(params[:id])
+    if params[:name] == ""
+      redirect to("/houses/#{@house.id}/edit")
+    else
+      @house.name = params[:name]
+      @house.save
+      redirect to("/houses/#{@house.id}")
+    end
+  end
+
 end

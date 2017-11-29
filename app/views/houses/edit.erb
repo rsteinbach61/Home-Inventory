@@ -1,1 +1,8 @@
-edit house
+
+
+<h3> Edit House </h3>
+<form action="/houses/<%=@house.id%>" method="POST">
+<input id="hidden" type="hidden" name="_method" value="PATCH">
+<p><input type="text" name="name" value="<%=@house.name%>" required="true"></p>
+<input type="submit" value="Save" id="submit">
+</form>
