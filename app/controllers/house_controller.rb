@@ -4,8 +4,8 @@ class HouseController < ApplicationController
     erb :'/houses/index'
   end
 
-  get '/create_house' do
-    erb :'/houses/create_house'
+  get '/houses/new' do
+    erb :'/houses/new'
   end
 
   post '/new_house' do
