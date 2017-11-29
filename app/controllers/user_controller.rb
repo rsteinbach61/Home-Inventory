@@ -17,10 +17,11 @@ class UserController < ApplicationController
   @house = House.create(:name => "Primary", :user_id => @user.id)
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      redirect to('/houses/index')
+
     else
         redirect "/signup"
     end
+    erb :'/houses/index'
   end
 
   get '/login' do
