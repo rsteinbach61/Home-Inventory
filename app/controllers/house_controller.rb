@@ -29,4 +29,17 @@ class HouseController < ApplicationController
     end
   end
 
+  get '/houses/:id/edit' do
+    if logged_in?
+      @house = House.find(params[:id])
+      if @house.user_id == current_user.id
+      erb :'/houses/edit'
+      else
+        redirect to("/houses/#{@house.id}")
+      end
+    else
+      redirect to('/login')
+    end
+  end
+
 end
