@@ -14,4 +14,14 @@ class ItemController < ApplicationController
       redirect to ('/login')
     end
   end
+
+  get '/items/index' do
+    if logged_in?
+      @user = current_user
+      erb :'items/index'
+    else
+      redirect to ('/login')
+    end
+  end
+
 end

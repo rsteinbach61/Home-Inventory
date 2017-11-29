@@ -1,0 +1,9 @@
+<%binding.pry%>
+<%@user.items.each do |item|%>
+<ul>
+  <li><a href="/items/<%=item.id%>"><%=item.name%></a></li>
+</ul>
+<%end%>
+
+<p><a href="/houses/new"> Create House</a></p>
+<p><a href="/items/new"> Add Item</a></p>
