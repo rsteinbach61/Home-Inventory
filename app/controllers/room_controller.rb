@@ -2,6 +2,7 @@ class RoomController < ApplicationController
 
   get '/rooms/new' do
     if logged_in?
+      @user = current_user
       erb :'/rooms/new'
     else
       redirect to ('/login')
@@ -11,6 +12,7 @@ class RoomController < ApplicationController
     post '/rooms/new' do
       if logged_in?
         @user = current_user
+        binding.pry
         @room = Room.create(params)
         @room.save
         erb :'/rooms/show'
@@ -40,11 +42,11 @@ class RoomController < ApplicationController
     get '/rooms/:id/edit' do
       if logged_in?
         @room = Room.find(params[:id])
-          if @room.user_id == current_user.id
+          #if @room.user_id == current_user.id
             erb :'/rooms/edit'
-          else
-            redirect to("/rooms/#{@room.id}")
-          end
+          #else
+            #redirect to("/rooms/#{@room.id}")
+          #end
       else
         redirect to('/login')
       end
