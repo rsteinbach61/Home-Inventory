@@ -2,6 +2,7 @@ class UserController < ApplicationController
 
   get '/signup' do
     if !logged_in?
+
       erb :'/users/new'
     else
       redirect to('/houses/index')
@@ -9,15 +10,21 @@ class UserController < ApplicationController
   end
 
   post '/signup' do
+
     if params[:email].empty? || params[:password].empty?
       redirect to('/signup')
+    end
+
+    User.all.each do |user|
+      if user.email == params[:email]
+        redirect to('/signup')
+      end
     end
 
   @user = User.create(params)
   @house = House.create(:name => "Primary", :user_id => @user.id)
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-
     else
         redirect "/signup"
     end
