@@ -10,6 +10,7 @@ class HouseController < ApplicationController
 
   post '/new_house' do
     if logged_in?
+      @user = current_user
       @house = House.create(params)
       @house.user_id = current_user.id
       @house.save
