@@ -10,11 +10,15 @@ class ItemController < ApplicationController
 
   post '/items/new' do
     if logged_in?
-      @user = current_user
-      @item = Item.create(params)
-      @item.user_id = @user.id
-      @item.save
-      erb :'/items/show'
+      if params[:room_id]
+        @user = current_user
+        @item = Item.create(params)
+        @item.user_id = @user.id
+        @item.save
+        erb :'/items/show'
+      else
+        redirect to(:"/houses/#{params[:house_id]}")
+      end
     else
       redirect to ('/login')
     end

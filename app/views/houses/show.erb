@@ -34,6 +34,7 @@
         <p><input type="text" name="name" placeholder="name:" required="true"></p>
         <p><input type="date" name="purchase_date" placeholder="Purchase Date:"></p>
         <p><input type="number" name="value" placeholder="Value" ></p>
+        <input type="hidden" name="house_id" value="<%=@house.id%>">
         <% @house.rooms.each do |room| %>
           <label><%= room.name %></label>
           <input type="radio" name="room_id" value="<%=room.id%>" required="true">
