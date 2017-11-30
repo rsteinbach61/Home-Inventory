@@ -12,6 +12,7 @@ class RoomController < ApplicationController
     post '/rooms/new' do
       if logged_in?
         @user = current_user
+        binding.pry
         @room = Room.create(params)
         @room.save
         erb :'/rooms/show'

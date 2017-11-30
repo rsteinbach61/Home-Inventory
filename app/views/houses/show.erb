@@ -3,22 +3,37 @@
 <h3> House:</h3>
 <p><a href="/houses/<%=@house.id%>/edit"><%=@house.name%></a></p>
 
+<form action="/houses/<%=@house.id%>/delete" method="POST">
+  <input type="hidden" id="hidden" name="_method" value="DELETE">
+  <input type="submit" name="Delete House" id="Delete House" Value="Delete House">
+</form>
+
   <%@house.rooms.each do |room|%>
-  <h4>Room:</h4>
+
     <%if room.house_id == @house.id%>
-      <p><%=room.name%></p>
+      <h4>Room: <%=room.name%></h4>
       <h5>Items:</h5>
       <%Item.all.each do |item|%>
         <%if item.room_id == room.id%>
           <p><%=item.name%></p>
         <%end%>
       <%end%>
-      <%#binding.pry%>
     <%end%>
   <%end%>
 
+  <h3>Create New Item</h3>
+    <form action="/items/new" method="POST">
+      <p><input type="text" name="name" placeholder="name:" required="true"></p>
+      <% @house.rooms.each do |room| %>
+        <label><%= room.name %></label>
+        <input type="radio" name="room_id" value="<%=room.id%>" required="true">
+        <%end%>
+      <input type="submit" value="Create Item">
+    </form>
 
-<form action="/houses/<%=@house.id%>/delete" method="POST">
-  <input type="hidden" id="hidden" name="_method" value="DELETE">
-  <input type="submit" name="Delete House" id="Delete House" Value="Delete House">
-</form>
+  <h3>Create New Room</h3>
+    <form action="/rooms/new" method="POST">
+      <p><input type="text" name="name" placeholder="name:" required="true"></p>
+      <input type="hidden" name="house_id" value="<%=@house.id%>">
+      <input type="submit" value="Create Room">
+    </form>
