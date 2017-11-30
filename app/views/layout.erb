@@ -9,6 +9,7 @@
   <body>
     <h1>Home Inventory</h1>
     <%if logged_in?%>
+    <h3>Welcome: <%=current_user.email%></h3>
     <form action="/logout" method="POST">
       <input type="submit" name="logout" value="logout">
     </form>
