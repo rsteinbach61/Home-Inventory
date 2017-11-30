@@ -1,7 +1,7 @@
 
 
-<h3> House:</h3>
-<p><a href="/houses/<%=@house.id%>/edit"><%=@house.name%></a></p>
+<h3> House: <%=@house.name%> <a href="/houses/<%=@house.id%>/edit">Edit</a></h3>
+
 
 <form action="/houses/<%=@house.id%>/delete" method="POST">
   <input type="hidden" id="hidden" name="_method" value="DELETE">
