@@ -2,6 +2,7 @@ class HouseController < ApplicationController
 
   get '/houses/index' do
     if logged_in?
+      @user = current_user
       erb :'/houses/index'
     else
       redirect to("/login")
@@ -25,7 +26,7 @@ class HouseController < ApplicationController
     end
   end
 
-  post '/new_house' do
+  post '/houses/new' do
     if logged_in?
       @user = current_user
       @house = House.create(params)
@@ -66,6 +67,23 @@ class HouseController < ApplicationController
     else
       @house.name = params[:name]
       @house.save
+      redirect to("/houses/#{@house.id}")
+    end
+  end
+
+  delete '/houses/:id/delete' do
+    @house = House.find(params[:id])
+    if @house.user_id == current_user.id
+
+      @house.items.each do |item|
+        item.destroy
+      end
+      @house.rooms.each do |room|
+        room.destroy
+      end
+      @house.destroy
+    redirect to('/houses/index')
+    else
       redirect to("/houses/#{@house.id}")
     end
   end
