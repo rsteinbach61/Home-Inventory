@@ -1,2 +1,6 @@
-
+<h3>Item:</h3>
 <p><a href="/items/<%=@item.id%>/edit"><%=@item.name%></a></p>
+<h3>Room:</h3>
+<p><a href="../rooms/<%=@item.room.id%>"><%=@item.room.name%></a></p>
+<h3>House:</h3>
+<p><a href="../houses/<%=@item.room.house.id%>"><%=@item.room.house.name%></a></p>
