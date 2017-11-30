@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171123082304) do
+ActiveRecord::Schema.define(version: 20171130223749) do
 
   create_table "ar_internal_metadata", primary_key: "key", force: :cascade do |t|
     t.string   "value"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 20171123082304) do
     t.integer "user_id"
     t.string  "name"
     t.integer "room_id"
+    t.float   "value"
+    t.date    "purchase_date"
   end
 
   create_table "rooms", force: :cascade do |t|

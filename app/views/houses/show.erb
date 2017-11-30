@@ -1,6 +1,6 @@
 
 
-<h3> House: <%=@house.name%> <a href="/houses/<%=@house.id%>/edit">Edit</a></h3>
+<h3> Home: <%=@house.name%> <a href="/houses/<%=@house.id%>/edit">Edit</a></h3>
 
 
 <form action="/houses/<%=@house.id%>/delete" method="POST">
@@ -21,15 +21,6 @@
     <%end%>
   <%end%>
 
-  <h3>Create New Item</h3>
-    <form action="/items/new" method="POST">
-      <p><input type="text" name="name" placeholder="name:" required="true"></p>
-      <% @house.rooms.each do |room| %>
-        <label><%= room.name %></label>
-        <input type="radio" name="room_id" value="<%=room.id%>" required="true">
-        <%end%>
-      <input type="submit" value="Create Item">
-    </form>
 
   <h3>Create New Room</h3>
     <form action="/rooms/new" method="POST">
@@ -37,3 +28,15 @@
       <input type="hidden" name="house_id" value="<%=@house.id%>">
       <input type="submit" value="Create Room">
     </form>
+
+    <h3>Create New Item</h3>
+      <form action="/items/new" method="POST">
+        <p><input type="text" name="name" placeholder="name:" required="true"></p>
+        <p><input type="date" name="purchase_date" placeholder="Purchase Date:"></p>
+        <p><input type="number" name="value" placeholder="Value" ></p>
+        <% @house.rooms.each do |room| %>
+          <label><%= room.name %></label>
+          <input type="radio" name="room_id" value="<%=room.id%>" required="true">
+          <%end%>
+        <input type="submit" value="Create Item">
+      </form>
