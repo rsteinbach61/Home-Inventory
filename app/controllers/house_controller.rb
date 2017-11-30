@@ -8,6 +8,15 @@ class HouseController < ApplicationController
     end
   end
 
+  post '/houses/index' do
+    if logged_in?
+      @user = current_user
+      erb :'/houses/index'
+    else
+      redirect to("/login")
+    end
+  end
+
   get '/houses/new' do
     if logged_in?
       erb :'/houses/new'
