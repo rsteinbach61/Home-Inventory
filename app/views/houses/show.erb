@@ -2,7 +2,21 @@
 
 <h3> House:</h3>
 <p><a href="/houses/<%=@house.id%>/edit"><%=@house.name%></a></p>
-<a href="/items/index">Show Items</a>
+
+  <%@house.rooms.each do |room|%>
+  <h4>Room:</h4>
+    <%if room.house_id == @house.id%>
+      <p><%=room.name%></p>
+      <h5>Items:</h5>
+      <%Item.all.each do |item|%>
+        <%if item.room_id == room.id%>
+          <p><%=item.name%></p>
+        <%end%>
+      <%end%>
+      <%#binding.pry%>
+    <%end%>
+  <%end%>
+
 
 <form action="/houses/<%=@house.id%>/delete" method="POST">
   <input type="hidden" id="hidden" name="_method" value="DELETE">
