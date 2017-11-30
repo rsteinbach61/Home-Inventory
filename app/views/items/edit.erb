@@ -3,5 +3,9 @@
 <form action="/items/<%=@item.id%>" method="POST">
 <input id="hidden" type="hidden" name="_method" value="PATCH">
 <p><input type="text" name="name" value="<%=@item.name%>" required="true"></p>
+<% @user.rooms.each do |room| %>
+  <label><%= room.name %></label>
+  <input type="radio" name="room_id" value="<%=room.id%>" required="true">
+  <%end%>
 <input type="submit" value="Save" id="submit">
 </form>

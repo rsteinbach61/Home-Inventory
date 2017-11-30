@@ -1,6 +1,7 @@
 class ItemController < ApplicationController
   get '/items/new' do
     if logged_in?
+      @user = current_user
       erb :'/items/new'
     else
       redirect to ('/login')
@@ -38,6 +39,7 @@ class ItemController < ApplicationController
 
   get '/items/:id/edit' do
     if logged_in?
+      @user = current_user
       @item = Item.find(params[:id])
         if @item.user_id == current_user.id
           erb :'/items/edit'

@@ -4,7 +4,7 @@
 <p><input type="text" name="name" placeholder="name:" required="true"></p>
 <% @user.houses.each do |house| %>
   <label><%= house.name %></label>
-  <input type="radio" name="house_id" value="<%=house.id%>">
+  <input type="radio" name="house_id" value="<%=house.id%>" required="true">
   <%end%>
 <input type="submit" value="Create Room">
 </form>
