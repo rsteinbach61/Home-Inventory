@@ -32,6 +32,21 @@ class ItemController < ApplicationController
       redirect to ('/login')
     end
   end
+
+  get '/items/upload' do
+    erb :'/items/upload'
+  end
+
+  post '/items/upload' do
+    @filename = params[:file][:filename] #sets the file name to string in @filename
+    file_content = params[:file][:tempfile] #saves image file into file_content
+    File.open("./public/media/#{@filename}", 'wb')  do |file| #creates new file in /public/media, 'wb' = write bianary, must use .open it allows a block .new does not
+      file.write(file_content.read) #writes the contents of file_content in a file named with the string in @filename
+    end
+    erb :'/items/upload'
+  end
+
+
   get '/items/:id' do
     if logged_in?
       @item = Item.all.find(params[:id])
@@ -65,5 +80,7 @@ class ItemController < ApplicationController
       redirect to("/items/#{@item.id}")
     end
   end
+
+
   #-----------------
 end
