@@ -38,11 +38,15 @@ class ItemController < ApplicationController
   end
 
   post '/items/upload' do
+    binding.pry
     @filename = params[:file][:filename] #sets the file name to string in @filename
     file_content = params[:file][:tempfile] #saves image file into file_content
-    File.open("./public/media/#{@filename}", 'wb')  do |file| #creates new file in /public/media, 'wb' = write bianary, must use .open it allows a block .new does not
-      file.write(file_content.read) #writes the contents of file_content in a file named with the string in @filename
-    end
+    @house = House.find(params[:house_id])
+    @item = @house.items.find_by(name: params[:item])
+    
+      File.open("./public/media/#{@filename}", 'wb')  do |file| #creates new file in /public/media, 'wb' = write bianary, must use .open it allows a block .new does not
+        file.write(file_content.read) #writes the contents of file_content in a file named with the string in @filename
+      end
     erb :'/items/upload'
   end
 
