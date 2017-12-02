@@ -38,18 +38,23 @@ class ItemController < ApplicationController
   end
 
   post '/items/upload' do
-    binding.pry
+    #binding.pry
     @filename = params[:file][:filename] #sets the file name to string in @filename
     file_content = params[:file][:tempfile] #saves image file into file_content
     @house = House.find(params[:house_id])
     @item = @house.items.find_by(name: params[:item])
-    
+    @item.pic_file_name = @filename
+    @item.save
       File.open("./public/media/#{@filename}", 'wb')  do |file| #creates new file in /public/media, 'wb' = write bianary, must use .open it allows a block .new does not
         file.write(file_content.read) #writes the contents of file_content in a file named with the string in @filename
       end
-    erb :'/items/upload'
+    redirect to(:"/items/#{@item.id}")
   end
 
+  get '/items/:id/media' do
+    @item = Item.all.find(params[:id])
+    erb :'items/media'
+  end
 
   get '/items/:id' do
     if logged_in?
