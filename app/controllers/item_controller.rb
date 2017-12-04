@@ -15,7 +15,7 @@ class ItemController < ApplicationController
         @item = Item.create(params)
         @item.user_id = @user.id
         @item.save
-        erb :'/items/show'
+        redirect to(:"/houses/#{params[:house_id]}")
       else
         redirect to(:"/houses/#{params[:house_id]}")
       end
@@ -86,7 +86,7 @@ class ItemController < ApplicationController
     else
       @item.name = params[:name]
       @item.save
-      redirect to("/items/#{@item.id}")
+      redirect to("/houses/#{@item.house_id}")
     end
   end
 
