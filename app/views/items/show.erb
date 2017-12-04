@@ -1,7 +1,8 @@
-<h3>Item:</h3>
-<p><a href="/items/<%=@item.id%>/edit"><%=@item.name%></a></p>
-<h3>Room:</h3>
-<p><a href="../rooms/<%=@item.room.id%>"><%=@item.room.name%></a></p>
+<h3>Item: <%=@item.name%></h3>
+<h5>Room: <%=@item.room.name%></h5>
+<h5>Purchase Date: <%=@item.purchase_date%></h5>
+<h5>Value: <%=@item.value%></h5>
+<h5>Serial Number: <%=@item.serial_number%></h5>
+<h5><a href="/items/<%=@item.id%>/media"><%=@item.name%> Picture</a></h5>
 <h3>House:</h3>
-<p><a href="../houses/<%=@item.room.house.id%>"><%=@item.room.house.name%></a></p>
-<p><a href="/items/<%=@item.id%>/media"><%=@item.name%> Picture</a></p>
+<h5><a href="../houses/<%=@item.room.house.id%>"><%=@item.room.house.name%></a></h5>

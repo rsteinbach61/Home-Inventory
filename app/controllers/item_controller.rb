@@ -38,7 +38,6 @@ class ItemController < ApplicationController
   end
 
   post '/items/upload' do
-    #binding.pry
     @filename = params[:file][:filename] #sets the file name to string in @filename
     file_content = params[:file][:tempfile] #saves image file into file_content
     @house = House.find(params[:house_id])
@@ -85,6 +84,10 @@ class ItemController < ApplicationController
       redirect to("/items/#{@item.id}/edit")
     else
       @item.name = params[:name]
+      @item.room_id = params[:room_id]
+      @item.purchase_date = params[:purchase_date]
+      @item.value = params[:value]
+      @item.serial_number = params[:serial_number]
       @item.save
       redirect to("/houses/#{@item.house_id}")
     end

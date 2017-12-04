@@ -10,20 +10,20 @@ class RoomController < ApplicationController
   end
 
     post '/rooms/new' do
-      if logged_in?
-        #binding.pry
+      if !logged_in?
+        redirect to ('/login')
+      end
+
+      if !Room.all.empty?
         Room.all.each do |room|
           if room.house_id == params[:house_id].to_i && room.name == params[:name]
             redirect to("/houses/#{room.house_id}")
-          else
-            @user = current_user
-            @room = Room.create(params)
-            redirect to("/houses/#{@room.house_id}")
           end
         end
-      else
-        redirect to ('/login')
       end
+        @user = current_user
+        @room = Room.create(params)
+        redirect to("/houses/#{@room.house_id}")
     end
 
     get '/rooms/index' do
