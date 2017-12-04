@@ -5,7 +5,7 @@
 
 <form action="/houses/<%=@house.id%>/delete" method="POST">
   <input type="hidden" id="hidden" name="_method" value="DELETE">
-  <input type="submit" name="Delete House" id="Delete House" Value="Delete House">
+  <input type="submit" name="Delete Home" id="Delete Home" Value="Delete Home">
 </form>
 
   <%@house.rooms.each do |room|%>
@@ -15,7 +15,7 @@
       <h5>Items:</h5>
       <%Item.all.each do |item|%>
         <%if item.room_id == room.id%>
-          <p><%=item.name%></p>
+          <p><a href="/items/"><%=item.name%></a></p>
         <%end%>
       <%end%>
     <%end%>
