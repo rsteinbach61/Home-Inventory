@@ -12,6 +12,7 @@ class ItemController < ApplicationController
     if logged_in?
       if params[:room_id]
         @user = current_user
+        binding.pry
         @item = Item.create(params)
         @item.user_id = @user.id
         @item.save
@@ -90,6 +91,15 @@ class ItemController < ApplicationController
     end
   end
 
+  delete '/items/:id/delete' do
+    @item = Item.find(params[:id])
+    if @item.user_id == current_user.id
+      @item.destroy
+      redirect to('/items/index')
+    else
+      redirect to("/items/#{@item.id}")
+    end
+  end
 
   #-----------------
 end
