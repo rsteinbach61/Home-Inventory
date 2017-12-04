@@ -51,6 +51,17 @@ class RoomController < ApplicationController
       end
     end
 
+    patch '/rooms/:id' do
+      @room = Room.find(params[:id])
+      if params[:name] == ""
+        redirect to("/rooms/#{@room.id}/edit")
+      else
+        @room.name = params[:name]
+        @room.save
+        redirect to("/houses/#{@room.house_id}")
+      end
+    end
+
     delete '/rooms/:id/delete' do
       @room = Room.find(params[:id])
       if @room.house.user_id == current_user.id

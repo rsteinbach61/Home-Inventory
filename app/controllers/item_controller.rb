@@ -12,7 +12,6 @@ class ItemController < ApplicationController
     if logged_in?
       if params[:room_id]
         @user = current_user
-        binding.pry
         @item = Item.create(params)
         @item.user_id = @user.id
         @item.save

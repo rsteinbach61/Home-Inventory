@@ -72,7 +72,6 @@ class HouseController < ApplicationController
   end
 
   delete '/houses/:id/delete' do
-    binding.pry
     @house = House.find(params[:id])
     if @house.user_id == current_user.id && @house.name != "Primary"
 

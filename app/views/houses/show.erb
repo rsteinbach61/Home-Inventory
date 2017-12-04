@@ -58,12 +58,16 @@
       <form action="/items/upload" method="POST" enctype="multipart/form-data">
       <p><input type="file" name="file" ></p>
       <input type="hidden" name="house_id" value="<%=@house.id%>">
-      <%#binding.pry%>
+
                 <input list="items" name="item">
                   <datalist id="items">
+                    <%#binding.pry%>
                     <%@house.items.each do |item|%>
                       <option name="item_name" value="<%=item.name%>">
                     <%end%>
                   </datalist>
       <input type="submit" value="Upload Item">
       </form>
+        <br></br>
+        <br></br>
+        <br></br>
