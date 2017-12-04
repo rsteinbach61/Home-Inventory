@@ -94,9 +94,9 @@ class ItemController < ApplicationController
     @item = Item.find(params[:id])
     if @item.user_id == current_user.id
       @item.destroy
-      redirect to('/items/index')
+      redirect to("/houses/#{@item.house_id}")
     else
-      redirect to("/items/#{@item.id}")
+      redirect to("/houses/#{@item.house_id}")
     end
   end
 

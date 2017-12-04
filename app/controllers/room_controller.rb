@@ -76,9 +76,9 @@ class RoomController < ApplicationController
           item.destroy
         end
         @room.destroy
-        redirect to('/rooms/index')
+        redirect to('/houses/index')
       else
-        redirect to("/rooms/#{@room.id}")
+        redirect to("/houses/#{@room.id}")
       end
     end
 
