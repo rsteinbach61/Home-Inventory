@@ -65,7 +65,7 @@ class ItemController < ApplicationController
     end
   end
 
-  get '/items/:id/edit' do
+  post '/items/:id/edit' do
     if logged_in?
       @user = current_user
       @item = Item.find(params[:id])

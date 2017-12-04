@@ -47,7 +47,7 @@ class HouseController < ApplicationController
     end
   end
 
-  get '/houses/:id/edit' do
+  post '/houses/:id/edit' do
     if logged_in?
       @house = House.find(params[:id])
       if @house.user_id == current_user.id && @house.name != "Primary"

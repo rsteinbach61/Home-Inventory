@@ -4,19 +4,24 @@
     <meta charset="utf-8">
     <title>Home Inventory</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/style.css">
   </head>
   <body>
     <h1>Home Inventory</h1>
     <%if logged_in?%>
-    <h3>Welcome: <%=current_user.email%></h3>
-    <form action="/logout" method="POST">
-      <input type="submit" name="logout" value="logout">
-    </form>
-    <br></br>
-    <form action="/houses/index" method="POST">
-      <input type="submit" name="Home" value="Home">
-    </form>
+    <h3>Inventory for: <%=current_user.email%></h3>
+    <div id="layout_buttons">
+      <div id="logout" class="display">
+      <form action="/logout" method="POST">
+        <input type="submit" name="logout" value="logout">
+      </form>
+    </div>
+    <div id="home" class="display">
+      <form action="/houses/index" method="POST">
+        <input type="submit" name="Home" value="Home">
+      </form>
+    </div>
+  </div>
     <%end%>
 <%=yield%>
   </body>

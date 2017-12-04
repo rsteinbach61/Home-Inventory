@@ -1,31 +1,44 @@
 
 
-<h3> Home: <%=@house.name%> <a href="/houses/<%=@house.id%>/edit">Edit</a></h3>
+<h3 class="display"> Home: <%=@house.name%> </h3>
 
+<form action="/houses/<%=@house.id%>/edit" method="POST" class="display">
+  <input type="submit" name="Edit" id="Edit" Value="Edit">
+</form>
 
-<form action="/houses/<%=@house.id%>/delete" method="POST">
+<form action="/houses/<%=@house.id%>/delete" method="POST" class="display">
   <input type="hidden" id="hidden" name="_method" value="DELETE">
-  <input type="submit" name="Delete Home" id="Delete Home" Value="Delete Home">
+  <input type="submit" name="Delete" id="Delete" Value="Delete">
 </form>
 
   <%@house.rooms.each do |room|%>
-
+<div>
     <%if room.house_id == @house.id%>
-      <h4>Room: <%=room.name%> <a href="/rooms/<%=room.id%>/edit">Edit</a></h4>
+      <h4 class="display">Room: <%=room.name%></h4>
 
-      <form action="/rooms/<%=room.id%>/delete" method="POST">
-        <input type="hidden" id="hidden" name="_method" value="DELETE">
-        <input type="submit" name="Delete Room" id="Delete Room" Value="Delete Room">
+      <form action="/rooms/<%=room.id%>/edit" method="POST" class="display">
+        <input type="submit" name="Edit" id="Edit" Value="Edit">
       </form>
+
+      <form action="/rooms/<%=room.id%>/delete" method="POST" class="display">
+        <input type="hidden" id="hidden" name="_method" value="DELETE">
+        <input type="submit" name="Delete" id="Delete" Value="Delete">
+      </form>
+</div>
 
   <h5>Items:</h5>
       <%Item.all.each do |item|%>
+      <div>
         <%if item.room_id == room.id%>
-          <p><a href="/items/<%=item.id%>"><%=item.name%></a> <a href="/items/<%=item.id%>/edit">Edit</a></p>
+          <p class="display"><a href="/items/<%=item.id%>"><%=item.name%></a></p>
 
-          <form action="/items/<%=item.id%>/delete" method="POST">
+          <form action="/items/<%=item.id%>/edit" method="POST" class="display">
+            <input type="submit" name="Edit" id="Edit" Value="Edit">
+          </form>
+
+          <form action="/items/<%=item.id%>/delete" method="POST" class="display">
             <input type="hidden" id="hidden" name="_method" value="DELETE">
-            <input type="submit" name="Delete item" id="Delete item" Value="Delete item">
+            <input type="submit" name="Delete" id="Delete" Value="Delete">
           </form>
 
         <%end%>
@@ -33,7 +46,7 @@
     <%end%>
   <%end%>
 
-
+</div>
   <h3>Create New Room</h3>
     <form action="/rooms/new" method="POST">
       <p><input type="text" name="name" placeholder="name:" required="true"></p>

@@ -1,0 +1,18 @@
+body{
+  margin-left: 20px;
+}
+
+#logout{
+  width: 75px;
+}
+
+#home{
+  width: 75px;
+}
+.display{
+  display: inline-block;
+}
+
+form{
+  font-size: 10px;
+}

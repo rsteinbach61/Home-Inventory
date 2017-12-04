@@ -44,7 +44,7 @@ class RoomController < ApplicationController
       end
     end
 
-    get '/rooms/:id/edit' do
+    post '/rooms/:id/edit' do
       if logged_in?
         @user = current_user
         @room = Room.find(params[:id])
