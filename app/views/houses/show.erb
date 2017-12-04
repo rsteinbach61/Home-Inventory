@@ -11,11 +11,11 @@
   <%@house.rooms.each do |room|%>
 
     <%if room.house_id == @house.id%>
-      <h4>Room: <%=room.name%></h4>
+      <h4>Room: <%=room.name%> <a href="/rooms/<%=room.id%>/edit">Edit</a></h4>
       <h5>Items:</h5>
       <%Item.all.each do |item|%>
         <%if item.room_id == room.id%>
-          <p><a href="/items/"><%=item.name%></a></p>
+          <p><a href="/items/<%=item.id%>"><%=item.name%></a> <a href="/items/<%=item.id%>/edit">Edit</a></p>
         <%end%>
       <%end%>
     <%end%>
