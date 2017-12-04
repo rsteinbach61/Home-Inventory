@@ -60,14 +60,14 @@
       <p><input type="file" name="file" ></p>
       <input type="hidden" name="house_id" value="<%=@house.id%>">
 
-                <input list="items" name="item">
-                  <datalist id="items">
+                <input list="items" name="item" placeholder="Choose Item">
+                  <datalist id="items" >
                     <%#binding.pry%>
                     <%@house.items.each do |item|%>
                       <option name="item_name" value="<%=item.name%>">
                     <%end%>
                   </datalist>
-      <input type="submit" value="Upload Item">
+      <input type="submit" value="Upload File">
       </form>
         <br></br>
         <br></br>
