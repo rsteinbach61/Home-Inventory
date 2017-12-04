@@ -51,4 +51,17 @@ class RoomController < ApplicationController
       end
     end
 
+    delete '/rooms/:id/delete' do
+      @room = Room.find(params[:id])
+      if @room.house.user_id == current_user.id
+        @room.items.each do |item|
+          item.destroy
+        end
+        @room.destroy
+        redirect to('/rooms/index')
+      else
+        redirect to("/rooms/#{@room.id}")
+      end
+    end
+
 end

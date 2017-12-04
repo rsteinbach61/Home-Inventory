@@ -13,6 +13,12 @@
     <%if room.house_id == @house.id%>
       <h4>Room: <%=room.name%> <a href="/rooms/<%=room.id%>/edit">Edit</a></h4>
       <h5>Items:</h5>
+
+      <form action="/rooms/<%=room.id%>/delete" method="POST">
+        <input type="hidden" id="hidden" name="_method" value="DELETE">
+        <input type="submit" name="Delete Room" id="Delete Room" Value="Delete Room">
+      </form>
+
       <%Item.all.each do |item|%>
         <%if item.room_id == room.id%>
           <p><a href="/items/<%=item.id%>"><%=item.name%></a> <a href="/items/<%=item.id%>/edit">Edit</a></p>
