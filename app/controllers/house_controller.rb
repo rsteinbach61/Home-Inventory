@@ -50,7 +50,7 @@ class HouseController < ApplicationController
   get '/houses/:id/edit' do
     if logged_in?
       @house = House.find(params[:id])
-      if @house.user_id == current_user.id
+      if @house.user_id == current_user.id && @house.name != "Primary"
       erb :'/houses/edit'
       else
         redirect to("/houses/#{@house.id}")
