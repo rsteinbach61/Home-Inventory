@@ -1,4 +1,7 @@
+require 'rack-flash'
+
 class UserController < ApplicationController
+  use Rack::Flash
 
   get '/signup' do
     if !logged_in?
@@ -17,7 +20,8 @@ class UserController < ApplicationController
 
     User.all.each do |user|
       if user.email == params[:email]
-        redirect to('/signup')
+        flash[:login_error] = "*** Email Already In Use ***"
+        redirect to('/index')
       end
     end
 
@@ -29,6 +33,10 @@ class UserController < ApplicationController
         redirect "/signup"
     end
     erb :'/houses/index'
+  end
+
+  get '/index' do
+    erb :'/index'
   end
 
   get '/login' do
