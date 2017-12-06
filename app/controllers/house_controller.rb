@@ -1,4 +1,7 @@
+require 'rack-flash'
+
 class HouseController < ApplicationController
+  use Rack::Flash
 
   get '/houses/index' do
     if logged_in?
@@ -53,6 +56,7 @@ class HouseController < ApplicationController
       if @house.user_id == current_user.id && @house.name != "Primary"
       erb :'/houses/edit'
       else
+        flash[:message] = "*** CAN'T EDIT PRIMARY ***"
         redirect to("/houses/#{@house.id}")
       end
     else
@@ -84,6 +88,7 @@ class HouseController < ApplicationController
       @house.destroy
     redirect to('/houses/index')
     else
+      flash[:message] = "*** CAN'T DELETE PRIMARY ***"
       redirect to("/houses/#{@house.id}")
     end
   end

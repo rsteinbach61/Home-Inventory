@@ -1,4 +1,8 @@
+require 'rack-flash'
+
 class ItemController < ApplicationController
+  use Rack::Flash
+
   get '/items/new' do
     if logged_in?
       @user = current_user
@@ -17,6 +21,7 @@ class ItemController < ApplicationController
         @item.save
         redirect to(:"/houses/#{params[:house_id]}")
       else
+        flash[:room_error] = "*** FIRST CREATE A ROOM ***"
         redirect to(:"/houses/#{params[:house_id]}")
       end
     else

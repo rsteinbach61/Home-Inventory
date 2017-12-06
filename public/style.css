@@ -17,3 +17,7 @@ body{
 form{
   font-size: 10px;
 }
+
+#flash{
+  color: red;
+}
