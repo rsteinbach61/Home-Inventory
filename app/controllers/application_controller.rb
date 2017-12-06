@@ -10,7 +10,8 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-  erb :'/index'
+    session.clear
+    erb :'/index'
   end
 
   helpers do
@@ -23,6 +24,6 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  
+
 
 end
