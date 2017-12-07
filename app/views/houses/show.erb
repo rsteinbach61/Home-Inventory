@@ -1,4 +1,3 @@
-
 <br></br>
 <div id="flash">
 <% if flash.has?(:message) %>
@@ -6,96 +5,100 @@
 <% end %>
 </div>
 
-<h3 class="display"> Home: <%=@house.name%> </h3>
+<div class="row">
+  <div class="col-sm-6">
 
-<form action="/houses/<%=@house.id%>/edit" method="POST" class="display">
-  <input type="submit" name="Edit" id="Edit" Value="Edit">
-</form>
+    <h3 class="display"> Home: <%=@house.name%> </h3>
 
-<form action="/houses/<%=@house.id%>/delete" method="POST" class="display">
-  <input type="hidden" id="hidden" name="_method" value="DELETE">
-  <input type="submit" name="Delete" id="Delete" Value="Delete">
-</form>
+    <form action="/houses/<%=@house.id%>/edit" method="POST" class="display">
+      <input type="submit" name="Edit" id="Edit" Value="Edit">
+    </form>
 
-  <%@house.rooms.each do |room|%>
-<div>
-    <%if room.house_id == @house.id%>
-      <h4 class="display">Room: <%=room.name%></h4>
+    <form action="/houses/<%=@house.id%>/delete" method="POST" class="display">
+      <input type="hidden" id="hidden" name="_method" value="DELETE">
+      <input type="submit" name="Delete" id="Delete" Value="Delete">
+    </form>
 
-      <form action="/rooms/<%=room.id%>/edit" method="POST" class="display">
-        <input type="submit" name="Edit" id="Edit" Value="Edit">
-      </form>
+      <%@house.rooms.each do |room|%>
 
-      <form action="/rooms/<%=room.id%>/delete" method="POST" class="display">
-        <input type="hidden" id="hidden" name="_method" value="DELETE">
-        <input type="submit" name="Delete" id="Delete" Value="Delete">
-      </form>
-</div>
+        <%if room.house_id == @house.id%>
+          <h4 >Room: <%=room.name%></h4>
 
-  <h5>Items:</h5>
-      <%Item.all.each do |item|%>
-      <div>
-        <%if item.room_id == room.id%>
-          <p class="display"><a href="/items/<%=item.id%>"><%=item.name%></a></p>
-
-          <form action="/items/<%=item.id%>/edit" method="POST" class="display">
+          <form action="/rooms/<%=room.id%>/edit" method="POST" class="display">
             <input type="submit" name="Edit" id="Edit" Value="Edit">
           </form>
 
-          <form action="/items/<%=item.id%>/delete" method="POST" class="display">
+          <form action="/rooms/<%=room.id%>/delete" method="POST" class="display">
             <input type="hidden" id="hidden" name="_method" value="DELETE">
             <input type="submit" name="Delete" id="Delete" Value="Delete">
           </form>
 
+
+      <h5>Items:</h5>
+          <%Item.all.each do |item|%>
+
+            <%if item.room_id == room.id%>
+              <p class="display"><a href="/items/<%=item.id%>"><%=item.name%></a></p>
+
+              <form action="/items/<%=item.id%>/edit" method="POST" class="display">
+                <input type="submit" name="Edit" id="Edit" Value="Edit">
+              </form>
+
+              <form action="/items/<%=item.id%>/delete" method="POST" class="display">
+                <input type="hidden" id="hidden" name="_method" value="DELETE">
+                <input type="submit" name="Delete" id="Delete" Value="Delete">
+              </form>
+
+            <%end%>
+          <%end%>
         <%end%>
       <%end%>
-    <%end%>
-  <%end%>
-
-</div>
-  <h3>Create New Room</h3>
-    <form action="/rooms/new" method="POST">
-      <p><input type="text" name="name" placeholder="name:" required="true"></p>
-      <input type="hidden" name="house_id" value="<%=@house.id%>">
-      <input type="submit" value="Create Room">
-    </form>
-
-    <div id="flash">
-    <% if flash.has?(:room_error) %>
-      <h3 style="color:red;"><%= flash[:room_error] %></h3>
-    <% end %>
     </div>
-    
-    <h3>Create New Item</h3>
-      <form action="/items/new" method="POST">
-        <p><input type="text" name="name" placeholder="name:" required="true"></p>
-        <p><input type="date" name="purchase_date" placeholder="Purchase Date:"></p>
-        <p><input type="number" name="value" placeholder="Value" ></p>
-        <p><input type="text" name="serial_number" placeholder="serial#" ></p>
-        <input type="hidden" name="house_id" value="<%=@house.id%>">
-        <% @house.rooms.each do |room| %>
-          <label><%= room.name %></label>
-          <input type="radio" name="room_id" value="<%=room.id%>" required="true">
-          <%end%>
-        <input type="submit" value="Create Item">
-      </form>
+    <div class="col-sm-6">
+
+      <h3>Create New Room</h3>
+        <form action="/rooms/new" method="POST">
+          <p><input type="text" name="name" placeholder="name:" required="true"></p>
+          <input type="hidden" name="house_id" value="<%=@house.id%>">
+          <input type="submit" value="Create Room">
+        </form>
+
+        <div id="flash">
+        <% if flash.has?(:room_error) %>
+          <h3 style="color:red;"><%= flash[:room_error] %></h3>
+        <% end %>
+        </div>
+
+        <h3>Create New Item</h3>
+          <form action="/items/new" method="POST">
+            <p><input type="text" name="name" placeholder="name:" required="true"></p>
+            <p><input type="date" name="purchase_date" placeholder="Purchase Date:"></p>
+            <p><input type="number" name="value" placeholder="Value" ></p>
+            <p><input type="text" name="serial_number" placeholder="serial#" ></p>
+            <input type="hidden" name="house_id" value="<%=@house.id%>">
+            <% @house.rooms.each do |room| %>
+              <label><%= room.name %></label>
+              <input type="radio" name="room_id" value="<%=room.id%>" required="true">
+              <%end%>
+            <input type="submit" value="Create Item">
+          </form>
 
 
 
-    <h3>Upload Picture or Receipt</h3>
-      <form action="/items/upload" method="POST" enctype="multipart/form-data">
-      <p><input type="file" name="file" ></p>
-      <input type="hidden" name="house_id" value="<%=@house.id%>">
+        <h3>Upload Picture or Receipt</h3>
+          <form action="/items/upload" method="POST" enctype="multipart/form-data">
+          <p><input type="file" name="file" ></p>
+          <input type="hidden" name="house_id" value="<%=@house.id%>">
 
-      <label>Choose Item</label>
-      <select name="item">
-        <%@house.items.each do |item|%>
-          <option value="<%=item.name%>"><%=item.name%></option>
-        <%end%>
-      </select>
+          <label>Choose Item</label>
+          <select name="item">
+            <%@house.items.each do |item|%>
+              <option value="<%=item.name%>"><%=item.name%></option>
+            <%end%>
+          </select>
 
-      <input type="submit" value="Upload File">
-      </form>
-        <br></br>
-        <br></br>
-        <br></br>
+          <input type="submit" value="Upload File">
+          </form>
+
+      </div>
+</div>
