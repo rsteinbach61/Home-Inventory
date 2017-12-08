@@ -1,17 +1,15 @@
 development:
-  adapter: postgresql
-  database: house_inventory_development
+  adapter: sqlite3
+  database: db/development.sqlite3
+  host: localhost
   pool: 5
   timeout: 5000
 
-test:
-  adapter: postgresql
-  database: house_inventory_test
-  pool: 5
-  timeout: 5000
 
 production:
+  url: <%=ENV['DATABASE_URL']%>
   adapter: postgresql
   database: house_inventory_production
+  host: localhost
   pool: 5
   timeout: 5000
