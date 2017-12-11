@@ -9,7 +9,7 @@
   <body>
     <h1>Home Inventory</h1>
     <%if logged_in?%>
-    <h3>Inventory for: <%=current_name%></h3>
+    <h3>Inventory for: <%=current_user.name%></h3>
     <div id="layout_buttons">
       <div id="logout" class="display">
       <form action="/logout" method="POST">
