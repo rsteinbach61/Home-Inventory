@@ -21,7 +21,7 @@ class UserController < ApplicationController
     User.all.each do |user|
       if user.email == params[:email]
         flash[:login_error] = "*** Email Already In Use ***"
-        redirect to('/index')
+        redirect to('/signup')
       end
     end
 

@@ -1,4 +1,10 @@
 
+<div id="flash">
+<% if flash.has?(:login_error) %>
+  <h3 style="color:red;"><%= flash[:login_error] %></h3>
+<% end %>
+</div>
+
 <h3>Sign Up</h3>
 <form action="/signup" method="POST">
 <p><input type="email" name="email" placeholder="email:" required="true"></p>
