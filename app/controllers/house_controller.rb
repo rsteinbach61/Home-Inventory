@@ -29,13 +29,17 @@ class HouseController < ApplicationController
     end
   end
 
-  post '/houses/new' do
+  post '/houses' do
     if logged_in?
-      @user = current_user
-      @house = House.create(params)
-      @house.user_id = current_user.id
-      @house.save
-      erb :"/houses/show"
+      @house = current_user.houses.build(params[:house])
+      if @house.save
+        flash[:house_success] = "*** House created ***"
+        erb :"/houses/show"
+      else
+        flash[:house_failure] = "*** House creation failed ***"
+        redirect to("/houses/new")
+      end
+
     else
       redirect to("/login")
     end

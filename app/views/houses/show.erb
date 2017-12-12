@@ -2,6 +2,8 @@
 <div id="flash">
 <% if flash.has?(:message) %>
   <h3 style="color:red;"><%= flash[:message] %></h3>
+<% elsif flash.has?(:house_success)%>
+  <h3 style="color:red;"><%= flash[:house_success] %></h3>
 <% end %>
 </div>
 

@@ -1,5 +1,11 @@
+<div id="flash">
+<% if flash.has?(:house_failure)%>
+  <h3 style="color:red;"><%= flash[:house_failure] %></h3>
+<% end %>
+</div>
+
 <h3>Add New House</h3>
-<form action="/houses/new" method="POST">
-<p>Name <input type="text" name="name" placeholder="name:" required="true"></p>
+<form action="/houses" method="POST">
+<p>Name <input type="text" name="house[name]" placeholder="name:" required="true"></p>
 <input type="submit" value="Add House">
 </form>

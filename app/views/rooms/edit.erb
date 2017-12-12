@@ -32,24 +32,27 @@
 <div id="flash">
 <% if flash.has?(:room_error) %>
   <h3 style="color:red;"><%= flash[:room_error] %></h3>
+<% elsif flash.has?(:item_failure) %>
+  <h3 style="color:red;"><%= flash[:item_failure] %></h3>
+<% else flash.has?(:item_success) %>
+  <h3 style="color:red;"><%= flash[:item_success] %></h3>
 <% end %>
 </div>
 
 <h3>Add Item</h3>
-  <form action="/items/new" method="POST">
-    <p>Name <input type="text" name="name" placeholder="name:" required="true"></p>
-    <p>Purchase Date <input type="date" name="purchase_date" placeholder="Purchase Date:"></p>
-    <p>Value <input type="number" name="value" placeholder="Value" ></p>
-    <p>Serial Number <input type="text" name="serial_number" placeholder="serial#" ></p>
+  <form action="/items" method="POST">
+    <p>Name <input type="text" name="item[name]" placeholder="name:" required="true"></p>
+    <p>Purchase Date <input type="date" name="item[purchase_date]" placeholder="Purchase Date:"></p>
+    <p>Value <input type="number" name="item[value]" placeholder="Value" ></p>
+    <p>Serial Number <input type="text" name="item[serial_number]" placeholder="serial#" ></p>
     <input type="hidden" name="house_id" value="<%=@room.house.id%>">
     <h4>Choose a room</h4>
     <% @room.house.rooms.each do |room| %>
       <label><%= room.name %></label>
-      <input type="radio" name="room_id" value="<%=room.id%>" required="true">
+      <input type="radio" name="item[room_id]" value="<%=room.id%>" required="true">
       <%end%>
     <input type="submit" value="Create Item">
   </form>
-
 
 
 <h3>Upload Picture or Receipt</h3>

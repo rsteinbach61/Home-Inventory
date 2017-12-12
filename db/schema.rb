@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171204164015) do
+ActiveRecord::Schema.define(version: 20171212162011) do
 
   create_table "houses", force: :cascade do |t|
     t.integer "user_id"
@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(version: 20171204164015) do
     t.float   "value"
     t.date    "purchase_date"
     t.string  "pic_file_name"
-    t.string  "house_id"
     t.string  "serial_number"
   end
 

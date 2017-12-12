@@ -12,14 +12,17 @@ class ItemController < ApplicationController
     end
   end
 
-  post '/items/new' do
+  post '/items' do
     if logged_in?
-      if params[:room_id]
-        @user = current_user
-        @item = Item.create(params)
-        @item.user_id = @user.id
-        @item.save
-        redirect to(:"/rooms/#{params[:room_id]}")
+      if params[:item][:room_id]
+        @item = current_user.items.build(params[:item])
+        #binding.pry
+        if @item.save
+          flash[:item_success] = "*** Item created ***"
+        else
+          flash[:item_failure] = "*** Item creation failed ***"
+        end
+        redirect to "/rooms/#{params[:item][:room_id]}"
       else
         flash[:room_error] = "*** FIRST CREATE A ROOM ***"
         redirect to(:"/houses/#{params[:house_id]}")
