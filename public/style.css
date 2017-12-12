@@ -4,11 +4,7 @@ body{
   padding-top: 70px;
 }
 
-#logout{
-  width: 75px;
-}
-
-#home{
+#button{
   width: 75px;
 }
 .display{

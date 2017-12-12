@@ -9,12 +9,30 @@
   </head>
   <body>
 
-<nav class="navbar navbar-default navbar-fixed-top">    
+<nav class="navbar navbar-default navbar-fixed-top">
 <div class="container-fluid">
       <div class="row">
         <div class="col-sm-4">
           <h3>Home Inventory</h3>
         </div>
+        <%if !logged_in?%>
+        <div class="col-sm-4">
+          <h3>Welcome</h3>
+        </div>
+
+        <div class="col-sm-3">
+          <div id="button" class="display">
+          <form action="/login" method="GET">
+            <input type="submit" name="login" value="login">
+          </form>
+        </div>
+        <div id="button" class="display">
+            <form action="/signup" method="GET">
+            <input type="submit" name="SignUp" value="SignUp">
+          </form>
+        </div>
+      </div>
+      <%end%>
 
         <%if logged_in?%>
         <div class="col-sm-4">
@@ -22,12 +40,12 @@
         </div>
 
         <div class="col-sm-3">
-          <div id="logout" class="display">
+          <div id="button" class="display">
           <form action="/logout" method="POST">
             <input type="submit" name="logout" value="logout">
           </form>
         </div>
-        <div id="home" class="display">
+        <div id="button" class="display">
             <form action="/houses/index" method="POST">
             <input type="submit" name="Home" value="Home">
           </form>
