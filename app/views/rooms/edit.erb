@@ -1,7 +1,71 @@
-
+<div class="row">
+  <div class="col-sm-6">
 <h3> Edit Room </h3>
 <form action="/rooms/<%=@room.id%>" method="POST">
 <input id="hidden" type="hidden" name="_method" value="PATCH">
 <p><input type="text" name="name" value="<%=@room.name%>" required="true"></p>
 <input type="submit" value="Save" id="submit">
 </form>
+
+<h5>Items:</h5>
+    <%Item.all.each do |item|%>
+
+      <%if item.room_id == @room.id%>
+      <div>
+        <h4 class="display"><a href="/items/<%=item.id%>"><%=item.name%></a></h4>
+
+        <form action="/items/<%=item.id%>/edit" method="POST" class="display">
+          <input type="submit" name="Edit" id="Edit" Value="Edit">
+        </form>
+
+        <form action="/items/<%=item.id%>/delete" method="POST" class="display">
+          <input type="hidden" id="hidden" name="_method" value="DELETE">
+          <input type="submit" name="Delete" id="Delete" Value="Delete">
+        </form>
+      </div>
+      <%end%>
+    <%end%>
+<h5><a href="/houses/<%=@room.house.id%>"><%=@room.house.name%></a></h5>
+</div>
+
+<div class="col-sm-6">
+<div id="flash">
+<% if flash.has?(:room_error) %>
+  <h3 style="color:red;"><%= flash[:room_error] %></h3>
+<% end %>
+</div>
+
+<h3>Create New Item</h3>
+  <form action="/items/new" method="POST">
+    <p><input type="text" name="name" placeholder="name:" required="true"></p>
+    <p><input type="date" name="purchase_date" placeholder="Purchase Date:"></p>
+    <p><input type="number" name="value" placeholder="Value" ></p>
+    <p><input type="text" name="serial_number" placeholder="serial#" ></p>
+    <input type="hidden" name="house_id" value="<%=@room.house.id%>">
+    <% @room.house.rooms.each do |room| %>
+      <label><%= room.name %></label>
+      <input type="radio" name="room_id" value="<%=room.id%>" required="true">
+      <%end%>
+    <input type="submit" value="Create Item">
+  </form>
+
+
+
+<h3>Upload Picture or Receipt</h3>
+  <form action="/items/upload" method="POST" enctype="multipart/form-data">
+  <p><input type="file" name="file" ></p>
+  <input type="hidden" name="house_id" value="<%=@room.house.id%>">
+
+  <label>Choose Item</label>
+  <select name="item">
+    <%@room.house.items.each do |item|%>
+      <option value="<%=item.name%>"><%=item.name%></option>
+    <%end%>
+  </select>
+
+  <input type="submit" value="Upload File">
+  </form>
+
+</div>
+
+</div>
