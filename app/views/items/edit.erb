@@ -1,15 +1,19 @@
 
 <h3> Edit Item </h3>
-<form action="/items/<%=@item.id%>" method="POST">
-<input id="hidden" type="hidden" name="_method" value="PATCH">
-<p><input type="text" name="item[name]" value="<%=@item.name%>" required="true"> Name</p>
-<p><input type="date" name="item[purchase_date]" value="<%=@item.purchase_date%>" placeholder="Purchase Date"> Purchase Date</p>
-<p><input type="number" name="item[value]" value="<%=@item.value%>" placeholder="Value" > Value</p>
-<p><input type="text" name="item[serial_number]" value="<%=@item.serial_number%>" placeholder="Serial Number" > Serial Number</p>
-<h4> Choose a room </h4>
-<% @user.rooms.each do |room| %>
-  <label><%= room.name %></label>
-  <input type="radio" name="item[room_id]" value="<%=room.id%>" required="true">
-  <%end%>
-<input type="submit" value="Save" id="submit">
-</form>
+  <form action="/items/<%=@item.id%>" method="POST">
+    <input id="hidden" type="hidden" name="_method" value="PATCH">
+    <p><input type="text" name="item[name]" value="<%=@item.name%>" required="true"> Name</p>
+
+    <p><input type="date" name="item[purchase_date]" value="<%=@item.purchase_date%>" placeholder="Purchase Date"> Purchase Date</p>
+
+    <p><input type="number" name="item[value]" value="<%=@item.value%>" placeholder="Value" > Value</p>
+
+    <p><input type="text" name="item[serial_number]" value="<%=@item.serial_number%>" placeholder="Serial Number" > Serial Number</p>
+
+    <h4> Choose a room </h4>
+    <% @user.rooms.each do |room| %>
+      <label><%= room.name %></label>
+      <input type="radio" name="item[room_id]" value="<%=room.id%>" required="true">
+    <%end%>
+    <input type="submit" value="Save" id="submit">
+  </form>

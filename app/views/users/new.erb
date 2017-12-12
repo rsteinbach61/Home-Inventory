@@ -1,14 +1,14 @@
 
 <div id="flash">
-<% if flash.has?(:login_error) %>
-  <h3 style="color:red;"><%= flash[:login_error] %></h3>
-<% end %>
+  <% if flash.has?(:login_error) %>
+    <h3 style="color:red;"><%= flash[:login_error] %></h3>
+  <% end %>
 </div>
 
 <h3>Sign Up</h3>
 <form action="/signup" method="POST">
-<p><input type="email" name="user[email]" placeholder="email:" required="true"></p>
-<p><input type="password" name="user[password]" placeholder="Password:" required="true"></p>
-<p><input type="text" name="user[name]" placeholder="name:" required="true"></p>
-<input type="submit" value="Sign Up">
+  <p><input type="email" name="user[email]" placeholder="email:" required="true"></p>
+  <p><input type="password" name="user[password]" placeholder="Password:" required="true"></p>
+  <p><input type="text" name="user[name]" placeholder="name:" required="true"></p>
+  <input type="submit" value="Sign Up">
 </form>

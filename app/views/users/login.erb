@@ -6,7 +6,7 @@
   <input type="submit" id="submit">
 </form>
 <div id="flash">
-<% if flash.has?(:login_error) %>
-  <h3 style="color:red;"><%= flash[:login_error] %></h3>
-<% end %>
+  <% if flash.has?(:login_error) %>
+    <h3 style="color:red;"><%= flash[:login_error] %></h3>
+  <% end %>
 </div>
