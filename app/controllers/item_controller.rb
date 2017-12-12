@@ -88,16 +88,12 @@ class ItemController < ApplicationController
 
   patch '/items/:id' do
     @item = Item.find(params[:id])
-    if params[:name] == ""
+    if params[:item][:name] == ""
       redirect to("/items/#{@item.id}/edit")
     else
-      @item.name = params[:name]
-      @item.room_id = params[:room_id]
-      @item.purchase_date = params[:purchase_date]
-      @item.value = params[:value]
-      @item.serial_number = params[:serial_number]
+      @item.update(params[:item])
       @item.save
-      redirect to("/houses/#{@item.house_id}")
+      redirect to("/houses/#{@item.room.house_id}")
     end
   end
 
