@@ -39,7 +39,6 @@ class HouseController < ApplicationController
         flash[:house_failure] = "*** House creation failed ***"
         redirect to("/houses/new")
       end
-
     else
       redirect to("/login")
     end

@@ -14,20 +14,20 @@ class UserController < ApplicationController
 
   post '/signup' do
 
-    if params[:email].empty? || params[:password].empty?
+    if params[:user][:email].empty? || params[:user][:password].empty?
       redirect to('/signup')
     end
 
     User.all.each do |user|
-      if user.email == params[:email]
+      if user.email == params[:user][:email]
         flash[:login_error] = "*** Email Already In Use ***"
         redirect to('/signup')
       end
     end
 
-  @user = User.create(params)
+  @user = User.create(params[:user])
   @house = House.create(:name => "Primary", :user_id => @user.id)
-    if @user && @user.authenticate(params[:password])
+    if @user && @user.authenticate(params[:user][:password])
       session[:user_id] = @user.id
     else
         redirect "/signup"
