@@ -2,12 +2,12 @@
 <h3> Edit Item </h3>
 <form action="/items/<%=@item.id%>" method="POST">
 <input id="hidden" type="hidden" name="_method" value="PATCH">
-<p><input type="text" name="name" value="<%=@item.name%>" required="true"></p>
-<p><input type="date" name="purchase_date" value="<%=@item.purchase_date%>" placeholder="Purchase Date"></p>
-<p><input type="number" name="value" value="<%=@item.value%>" placeholder="Value" ></p>
-<p><input type="text" name="serial_number" value="<%=@item.serial_number%>" placeholder="Serial Number" ></p>
+<p>Name <input type="text" name="name" value="<%=@item.name%>" required="true"></p>
+<p>Purchase Date <input type="date" name="purchase_date" value="<%=@item.purchase_date%>" placeholder="Purchase Date"></p>
+<p>Value <input type="number" name="value" value="<%=@item.value%>" placeholder="Value" ></p>
+<p>Serial Number <input type="text" name="serial_number" value="<%=@item.serial_number%>" placeholder="Serial Number" ></p>
+<h4> Choose a room </h4>
 <% @user.rooms.each do |room| %>
-
   <label><%= room.name %></label>
   <input type="radio" name="room_id" value="<%=room.id%>" required="true">
   <%end%>
