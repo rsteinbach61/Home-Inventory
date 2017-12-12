@@ -4,6 +4,10 @@
   <h3 style="color:red;"><%= flash[:message] %></h3>
 <% elsif flash.has?(:house_success)%>
   <h3 style="color:red;"><%= flash[:house_success] %></h3>
+<% elsif flash.has?(:room_success)%>
+    <h3 style="color:red;"><%= flash[:room_success] %></h3>
+    <% elsif flash.has?(:room_failure)%>
+      <h3 style="color:red;"><%= flash[:room_failure] %></h3>
 <% end %>
 </div>
 
@@ -41,9 +45,9 @@
     <div class="col-sm-6">
 
       <h3>Create New Room</h3>
-        <form action="/rooms/new" method="POST">
-          <p>Name <input type="text" name="name" placeholder="Room Name" required="true"></p>
-          <input type="hidden" name="house_id" value="<%=@house.id%>">
+        <form action="/rooms" method="POST">
+          <p>Name <input type="text" name="room[name]" placeholder="Room Name" required="true"></p>
+          <input type="hidden" name="room[house_id]" value="<%=@house.id%>">
           <input type="submit" value="Create Room">
         </form>
       </div>

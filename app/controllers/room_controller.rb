@@ -9,21 +9,27 @@ class RoomController < ApplicationController
     end
   end
 
-    post '/rooms/new' do
+    post '/rooms' do
       if !logged_in?
         redirect to ('/login')
       end
 
-      if !Room.all.empty?
-        Room.all.each do |room|
-          if room.house_id == params[:house_id].to_i && room.name == params[:name]
-            redirect to("/houses/#{room.house_id}")
-          end
+      #if !Room.all.empty?
+        #Room.all.each do |room|
+
+          #if room.house_id == params[:house_id].to_i && room.name == params[:room][:name]
+            #redirect to("/houses/#{room.house_id}")
+          #end
+        #end
+      #end
+
+      @room = current_user.rooms.build(params[:room])
+        if @room.save
+          flash[:room_success] = "*** Room created ***"
+        else
+          flash[:room_failure] = "*** Room creation failed ***"
         end
-      end
-        @user = current_user
-        @room = Room.create(params)
-        redirect to("/houses/#{@room.house_id}")
+      redirect to("/houses/#{@room.house_id}")
     end
 
     get '/rooms/index' do
@@ -37,7 +43,7 @@ class RoomController < ApplicationController
 
     get '/rooms/:id' do
       if logged_in?
-        @room = Room.all.find(params[:id])
+        @room = Room.all.find_by(id: params[:id])
         erb :'/rooms/edit'
       else
         redirect to('/login')
