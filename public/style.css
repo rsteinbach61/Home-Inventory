@@ -1,6 +1,7 @@
 body{
   margin-left: 20px;
   background-color: #cce6ff;
+  padding-top: 70px;
 }
 
 #logout{
@@ -20,4 +21,7 @@ form{
 
 #flash{
   color: red;
+}
+.navbar{
+  background-color: gray;
 }
