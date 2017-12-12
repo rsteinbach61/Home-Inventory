@@ -7,6 +7,7 @@
 <p><input type="number" name="value" value="<%=@item.value%>" placeholder="Value" ></p>
 <p><input type="text" name="serial_number" value="<%=@item.serial_number%>" placeholder="Serial Number" ></p>
 <% @user.rooms.each do |room| %>
+
   <label><%= room.name %></label>
   <input type="radio" name="room_id" value="<%=room.id%>" required="true">
   <%end%>

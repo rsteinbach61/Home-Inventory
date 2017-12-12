@@ -40,7 +40,7 @@
 
       <h3>Create New Room</h3>
         <form action="/rooms/new" method="POST">
-          <p><input type="text" name="name" placeholder="name:" required="true"></p>
+          <p>Name <input type="text" name="name" placeholder="Room Name" required="true"></p>
           <input type="hidden" name="house_id" value="<%=@house.id%>">
           <input type="submit" value="Create Room">
         </form>
