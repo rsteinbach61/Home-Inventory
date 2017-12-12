@@ -38,7 +38,7 @@ class RoomController < ApplicationController
     get '/rooms/:id' do
       if logged_in?
         @room = Room.all.find(params[:id])
-        erb :'/rooms/show'
+        erb :'/rooms/edit'
       else
         redirect to('/login')
       end

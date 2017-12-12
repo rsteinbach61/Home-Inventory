@@ -19,7 +19,7 @@ class ItemController < ApplicationController
         @item = Item.create(params)
         @item.user_id = @user.id
         @item.save
-        redirect to(:"/houses/#{params[:house_id]}")
+        redirect to(:"/rooms/#{params[:room_id]}")
       else
         flash[:room_error] = "*** FIRST CREATE A ROOM ***"
         redirect to(:"/houses/#{params[:house_id]}")
@@ -100,9 +100,10 @@ class ItemController < ApplicationController
 
   delete '/items/:id/delete' do
     @item = Item.find(params[:id])
+    #binding.pry
     if @item.user_id == current_user.id
       @item.destroy
-      redirect to("/houses/#{@item.house_id}")
+      redirect to("/rooms/#{@item.room_id}")
     else
       redirect to("/houses/#{@item.house_id}")
     end
