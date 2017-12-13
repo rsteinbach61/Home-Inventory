@@ -54,11 +54,7 @@ class RoomController < ApplicationController
       if logged_in?
         @user = current_user
         @room = Room.find_by(id: params[:id])
-          #if @room.user_id == current_user.id
-            erb :'/rooms/edit'
-          #else
-            #redirect to("/rooms/#{@room.id}")
-          #end
+        erb :'/rooms/edit'
       else
         redirect to('/login')
       end
@@ -69,8 +65,7 @@ class RoomController < ApplicationController
       if params[:name] == ""
         redirect to("/rooms/#{@room.id}/edit")
       else
-        @room.name = params[:name]
-        @room.save
+        @room.update(name: params[:room][:name])
         redirect to("/houses/#{@room.house_id}")
       end
     end

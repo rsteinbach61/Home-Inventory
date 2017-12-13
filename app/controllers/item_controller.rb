@@ -84,14 +84,12 @@ class ItemController < ApplicationController
       redirect to("/items/#{@item.id}/edit")
     else
       @item.update(params[:item])
-      @item.save
       redirect to("/houses/#{@item.room.house_id}")
     end
   end
 
   delete '/items/:id/delete' do
     @item = Item.find_by(id: params[:id])
-    #binding.pry
     if @item.user_id == current_user.id
       @item.destroy
       redirect to("/rooms/#{@item.room_id}")
