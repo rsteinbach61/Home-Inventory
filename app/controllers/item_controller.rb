@@ -32,14 +32,6 @@ class ItemController < ApplicationController
     end
   end
 
-  get '/items/index' do
-    if logged_in?
-      @user = current_user
-      erb :'items/index'
-    else
-      redirect to ('/login')
-    end
-  end
 
   get '/items/upload' do
     erb :'/items/upload'
@@ -48,7 +40,7 @@ class ItemController < ApplicationController
   post '/items/upload' do
     @filename = params[:file][:filename] #sets the file name to string in @filename
     file_content = params[:file][:tempfile] #saves image file into file_content
-    @house = House.find(params[:house_id])
+    @house = House.find_by(id: params[:house_id])
     @item = @house.items.find_by(name: params[:item])
     @item.pic_file_name = @filename
     @item.save
@@ -59,13 +51,13 @@ class ItemController < ApplicationController
   end
 
   get '/items/:id/media' do
-    @item = Item.all.find(params[:id])
+    @item = Item.all.find_by(id: params[:id])
     erb :'items/media'
   end
 
   get '/items/:id' do
     if logged_in?
-      @item = Item.all.find(params[:id])
+      @item = Item.all.find_by(id: params[:id])
       erb :'/items/show'
     else
       redirect to('/login')
@@ -75,7 +67,7 @@ class ItemController < ApplicationController
   post '/items/:id/edit' do
     if logged_in?
       @user = current_user
-      @item = Item.find(params[:id])
+      @item = Item.find_by(id: params[:id])
         if @item.user_id == current_user.id
           erb :'/items/edit'
         else
@@ -87,7 +79,7 @@ class ItemController < ApplicationController
   end
 
   patch '/items/:id' do
-    @item = Item.find(params[:id])
+    @item = Item.find_by(id: params[:id])
     if params[:item][:name] == ""
       redirect to("/items/#{@item.id}/edit")
     else
@@ -98,7 +90,7 @@ class ItemController < ApplicationController
   end
 
   delete '/items/:id/delete' do
-    @item = Item.find(params[:id])
+    @item = Item.find_by(id: params[:id])
     #binding.pry
     if @item.user_id == current_user.id
       @item.destroy

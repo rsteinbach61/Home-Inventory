@@ -53,7 +53,7 @@ class RoomController < ApplicationController
     post '/rooms/:id/edit' do
       if logged_in?
         @user = current_user
-        @room = Room.find(params[:id])
+        @room = Room.find_by(id: params[:id])
           #if @room.user_id == current_user.id
             erb :'/rooms/edit'
           #else
@@ -65,7 +65,7 @@ class RoomController < ApplicationController
     end
 
     patch '/rooms/:id' do
-      @room = Room.find(params[:id])
+      @room = Room.find_by(id: params[:id])
       if params[:name] == ""
         redirect to("/rooms/#{@room.id}/edit")
       else
@@ -76,7 +76,7 @@ class RoomController < ApplicationController
     end
 
     delete '/rooms/:id/delete' do
-      @room = Room.find(params[:id])
+      @room = Room.find_by(id: params[:id])
       if @room.house.user_id == current_user.id
         @room.items.each do |item|
           item.destroy

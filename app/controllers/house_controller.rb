@@ -46,7 +46,7 @@ class HouseController < ApplicationController
 
   get '/houses/:id' do
     if logged_in?
-      @house = House.all.find(params[:id])
+      @house = House.all.find_by(id: params[:id])
       erb :'/houses/show'
     else
       redirect to('/login')
@@ -55,7 +55,7 @@ class HouseController < ApplicationController
 
   post '/houses/:id/edit' do
     if logged_in?
-      @house = House.find(params[:id])
+      @house = House.find_by(id: params[:id])
       if @house.user_id == current_user.id && @house.name != "Primary"
       erb :'/houses/edit'
       else
@@ -68,7 +68,7 @@ class HouseController < ApplicationController
   end
 
   patch '/houses/:id' do
-    @house = House.find(params[:id])
+    @house = House.find_by(id: params[:id])
     if params[:name] == ""
       redirect to("/houses/#{@house.id}/edit")
     else
@@ -79,7 +79,7 @@ class HouseController < ApplicationController
   end
 
   delete '/houses/:id/delete' do
-    @house = House.find(params[:id])
+    @house = House.find_by(id: params[:id])
     if @house.user_id == current_user.id && @house.name != "Primary"
 
       @house.items.each do |item|
