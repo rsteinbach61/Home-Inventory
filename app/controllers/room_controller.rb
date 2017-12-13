@@ -14,6 +14,7 @@ class RoomController < ApplicationController
         redirect to ('/login')
       end
 
+      #to do: code to check if a room already exists and warn the user
       #if !Room.all.empty?
         #Room.all.each do |room|
 
