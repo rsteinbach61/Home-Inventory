@@ -72,8 +72,7 @@ class HouseController < ApplicationController
     if params[:name] == ""
       redirect to("/houses/#{@house.id}/edit")
     else
-      @house.name = params[:house][:name]
-      @house.save
+      @house.update(params[:house][:name])
       redirect to("/houses/#{@house.id}")
     end
   end
