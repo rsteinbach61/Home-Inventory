@@ -5,7 +5,6 @@ class UserController < ApplicationController
 
   get '/signup' do
     if !logged_in?
-
       erb :'/users/new'
     else
       redirect to('/houses/index')
@@ -63,6 +62,4 @@ class UserController < ApplicationController
     session.clear
     redirect to '/login'
   end
-
-  #-------------------------------
 end

@@ -82,5 +82,4 @@ class RoomController < ApplicationController
         redirect to("/houses/#{@room.id}")
       end
     end
-
 end
